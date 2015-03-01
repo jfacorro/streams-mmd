@@ -25,11 +25,15 @@
     (/ (count s))))
 
 (let [f (partial map (partial ams-random 10 75))
-      cases [[3 45 72]
-             [9 50 68]
-             [14 35 42]
-             [25 34 47]]]
-  #_(prn (map f cases))
+      cases [[17, 43, 51]
+[31, 48, 50]
+[25, 34, 47]
+[37, 46, 55]
+]
+      #_[[25 34 47]
+             [31 32 44]
+             [20 49 53]
+             [24 44 65]]]
   (->> cases
     (map f) 
     (map avg) 
@@ -53,14 +57,21 @@
         n)))
 
 (let [f (partial map (comp trailing-zeros hash-fn))
-      cases [[4 5 6 10]
-             [2 6 8 10]
-             [2 4 6 10]
-             [2 6 8 9]]]
+      cases [[4, 6, 9, 10]
+             [2, 5, 7, 10]
+             [ 3, 7, 8, 10]
+             [1, 2, 3, 9]] 
+      #_[[4 5 6 7]
+             [2 5 7 10]
+             [4 5 6 10]
+             [1 3 9 10]]
+      #_[[4 5 6 10]
+         [2 6 8 10]
+         [2 4 6 10]
+         [2 6 8 9]]]
   (->>
     (map (juxt identity f) cases)
-    (filter (fn [[x y]] (= (apply max y) 2)))
-    ffirst))
+    (filter (fn [[x y]] (= (apply max y) 2)))))
 
 
 
